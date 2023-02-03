@@ -40,8 +40,8 @@ module.exports = {
 
             return res.status(201).json({
                 ok: true,
-                msg: 'Usuario Registrado',
-                data : userStore
+                msg: 'Usuario Registrado. Se ha enviado un mail de confirmación',
+                user : userStore
             })
 
         } catch (error) {

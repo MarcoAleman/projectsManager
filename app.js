@@ -7,7 +7,7 @@ const connectDB = require('./database/config');
 const app = express();
 
 const cors = require('cors');
-const whiteList = [process.env.URL_FRONTEND];
+const whiteList = [process.env.URL_FRONT];
 const corsOptions = {
     origin: function (origin, cb) {
         if (whiteList.includes(origin)) {

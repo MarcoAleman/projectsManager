@@ -1,11 +1,15 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Alert } from "../components/Alert";
+import { clientAxios } from "../config/clientAxios";
 import { useForm } from "../hooks/useForm"
+import Swal from 'sweetalert2';
+
 
 export const Register = () => {
 
     const [alert, setAlert] = useState({});
+    const [sending, setSending] = useState(false);
 
     const exRegexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/;
 
@@ -18,7 +22,7 @@ export const Register = () => {
 
     const { name, email, password, password2 } = formValues;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         //console.log(formValues);
 
@@ -35,6 +39,35 @@ export const Register = () => {
         if(password != password2){
             handleShowAlert('Las contraseñas no coinciden');
             return null
+        };
+
+        try {
+
+            setSending(true);
+
+            const {data} = await clientAxios.post('/auth/register', {
+                name,
+                email,
+                password
+            })
+
+            setSending(false);
+
+            console.log(data.msg);
+
+            Swal.fire({
+                icon: 'info',
+                title: 'Gracias por registrarte!',
+                text: data.msg
+            })
+
+            reset();
+
+        } catch (error) {
+            console.error(error);
+
+            handleShowAlert(error.response.data.msg);
+            reset()
         }
     }
 
@@ -77,7 +110,7 @@ export const Register = () => {
                     <label htmlFor="password2">Confirme su contraseña</label>
                     <input type="password" id="password2" placeholder="Ingrese su contraseña"  value={password2} name='password2' onChange={handleInputChange} />
                 </div>
-                <button type="submit">Crear Cuenta</button>
+                <button type="submit" disabled={sending}>Crear Cuenta</button>
             </form>
 
             <nav>
