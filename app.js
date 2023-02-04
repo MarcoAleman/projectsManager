@@ -24,7 +24,7 @@ app
     .use(logger('dev'))
     .use(express.json())
     .use(express.urlencoded({ extended: false }))
-    .use(cors(corsOptions))
+    .use(cors(/* corsOptions */)) //Si quiero usar thunder debo borrar el corsOp...
 
 /* RUTAS */
 app

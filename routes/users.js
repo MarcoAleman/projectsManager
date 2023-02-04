@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const { profile } = require('../controllers/usersController');
+const checkToken = require('../middlewares/checkToken');
 
 /* /api/users */
 
 router
-    .get('/', profile)
+    .get('/profile', checkToken, profile)
     /* .post('/login', login)
     .get('/checked', checked)
     .get('/send-token', sendToken)

@@ -110,11 +110,11 @@ module.exports = {
                 msg: 'Usuario Logueado',
                 user : {
                     nombre : user.name,
-                    email : user.email,
-                    token : generateJWT({
-                        id : user._id
-                    })
-                }
+                    _id : user._id,
+                },
+                token : generateJWT({
+                    id : user._id
+                })
             })
         } catch (error) {
 
