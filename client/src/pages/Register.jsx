@@ -66,7 +66,7 @@ export const Register = () => {
         } catch (error) {
             console.error(error);
 
-            handleShowAlert(error.response.data.msg);
+            handleShowAlert(error.response?.data.msg);
             reset()
         }
     }

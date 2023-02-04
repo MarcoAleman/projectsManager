@@ -132,7 +132,7 @@ module.exports = {
                 email
             });
 
-            if(!user) throw createError(400, 'Email incorrecto')
+            if(!user) throw createError(400, 'El email no se encuentra registrado')
 
             const token = generateTokenRandom();
 
@@ -185,6 +185,8 @@ module.exports = {
             const user = await User.findOne({
                 token
             })
+
+            if(!user) throw createError(400, 'Token inválido');
 
             user.password = password;
             user.token = '';

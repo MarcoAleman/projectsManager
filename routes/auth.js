@@ -9,7 +9,7 @@ router
     .post('/register', register)
     .post('/login', login)
     .get('/checked', checked)
-    .get('/send-token', sendToken)
+    .post('/send-token', sendToken)
     .route('/reset-password')
         .get(verifyToken)
         .post(changePassword)
