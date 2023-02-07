@@ -1,6 +1,7 @@
 const createHttpError = require('http-errors');
 const Project = require('../database/models/Project');
 const errorResponse = require('../helpers/errorResponse');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports = {
     list: async (req, res) => {
@@ -46,7 +47,7 @@ module.exports = {
         try {
             const {id} = req.params;
             
-            //if(!ObjetId.isValid(id)) throw createHttpError(400, 'No es un ID valido')
+            if(!ObjectId.isValid(id)) throw createHttpError(400, 'No es un ID valido')
 
             const project = await Project.findById(id);
 
@@ -67,7 +68,7 @@ module.exports = {
         try {
             const {id} = req.params;
             
-            //if(!ObjetId.isValid(id)) throw createHttpError(400, 'No es un ID valido')
+            if(!ObjectId.isValid(id)) throw createHttpError(400, 'No es un ID valido')
             
             const project = await Project.findById(id);
 
@@ -99,7 +100,7 @@ module.exports = {
         try {
             const {id} = req.params;
             
-            //if(!ObjetId.isValid(id)) throw createHttpError(400, 'No es un ID valido')
+            if(!ObjectId.isValid(id)) throw createHttpError(400, 'No es un ID valido')
             
             const project = await Project.findById(id);
 

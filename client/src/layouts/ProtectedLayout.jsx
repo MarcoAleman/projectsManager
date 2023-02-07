@@ -1,4 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { Header } from '../components/Header';
+import { Sidebar } from '../components/Sidebar';
 import useAuth from '../hooks/useAuth';
 
 export const ProtectedLayout = () => {
@@ -17,9 +19,15 @@ export const ProtectedLayout = () => {
         <>
         {
             auth._id ? (
-                <main>
-                    <Outlet />
-                </main>
+                <div>
+                    <Header />
+                    <div>
+                        <Sidebar />
+                        <main>
+                            <Outlet />
+                        </main>
+                    </div>
+                </div>
             ) :
             <Navigate to='/' />
         }
